@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib && browserify ./lib/index.js -o ./lib/main.js",
+    "build": "cp src/main.html lib/ && babel src -d lib && browserify ./lib/index.js -o ./lib/main.js",
     "start": "http-server"
   },
   "author": "Roman Abendroth",
