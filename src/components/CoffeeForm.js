@@ -18,7 +18,7 @@ export default class CoffeeForm extends React.Component {
     handleCoffeeChange(coffeeChoice) {
         alert(coffeeChoice);
         this.setState({
-            selectedCoffee: coffeeChoice,
+            selectedCoffee: coffeeChoice
         });
     }
     sendCoffeeSetup() {
