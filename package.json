@@ -1,0 +1,27 @@
+{
+  "name": "coffee_mod",
+  "version": "1.0.0",
+  "description": "tarent's very own token-coffee-machine interface",
+  "main": "index.js",
+  "babel": {
+    "presets": ["react", "es2015"]
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib && browserify ./lib/index.js -o ./lib/main.js",
+    "start": "http-server"
+  },
+  "author": "Roman Abendroth",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "browserify": "^14.1.0",
+    "http-server": "^0.9.0"
+  }
+}
