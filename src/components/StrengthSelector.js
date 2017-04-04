@@ -19,6 +19,7 @@ export default class StrengthSelector extends React.Component {
         return options;
     }
     handleChange(event) {
+        this.props.onChange(event);
         this.setState({value: event.target.value});
     }
     handleSubmit(event) {

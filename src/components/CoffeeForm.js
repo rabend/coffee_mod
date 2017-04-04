@@ -15,11 +15,13 @@ export default class CoffeeForm extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-    handleCoffeeChange(coffeeChoice) {
-        alert(coffeeChoice);
-        this.setState({
-            selectedCoffee: coffeeChoice
-        });
+    handleCoffeeChange(event) {
+        alert("handleCoffeeChange: " + event.target.value);
+        this.setState({selectedCoffee: event.target.value});
+    }
+    handleStrengthChanged(event) {
+        alert("StrenghtChange: " + event.target.value);
+        this.setState({selectedStrength: event.target.value});
     }
     sendCoffeeSetup() {
     }
@@ -31,7 +33,7 @@ export default class CoffeeForm extends React.Component {
         return (
             <form onSubmit={this.handleSubmit}>
                 <CoffeeSelector values={this.state.coffeeChoices} onChange={this.handleCoffeeChange}/>
-                <StrengthSelector values={this.state.strengthChoices}/>
+                <StrengthSelector values={this.state.strengthChoices} onChange={this.handleStrengthChanged}/>
                 <input type="submit"/>
             </form>
         )

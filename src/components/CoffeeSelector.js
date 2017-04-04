@@ -23,7 +23,7 @@ export default class CoffeeSelector extends React.Component {
     handleChange(event) {
         const choice = event.target.value;
         alert("Choice was " + choice);
-        this.props.onChange(choice);
+        this.props.onChange(event);
         this.setState({value: event.target.value});
     }
     handleSubmit(event) {
