@@ -25,7 +25,7 @@ export default class CoffeeForm extends React.Component {
     }
 
     sendCoffeeSetup() {
-        alert("your configuration has been saved!");
+        console.log("The configration has been saved!");
         //AJAX POST call to backend here
     }
 
