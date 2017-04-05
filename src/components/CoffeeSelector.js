@@ -21,8 +21,6 @@ export default class CoffeeSelector extends React.Component {
         return options;
     }
     handleChange(event) {
-        const choice = event.target.value;
-        alert("Choice was " + choice);
         this.props.onChange(event);
         this.setState({value: event.target.value});
     }
