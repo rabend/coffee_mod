@@ -1,0 +1,14 @@
+{
+  "name": "coffee_mod_backend",
+  "version": "1.0.0",
+  "description": "backend application for tarent's very own coffee token device",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Roman Abendroth",
+  "license": "ISC",
+  "dependencies": {
+  }
+}
