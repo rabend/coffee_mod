@@ -1,11 +1,15 @@
 const http = require('http');
+const Repository = require('./repository.js');
 
 const server = http.createServer((req, res) => {
     const data = {
         body: ["Coffee", "Latte", "Cappucino"]
     };
 
-    const json = JSON.stringify(data);
+    const repo = new Repository("/home/rabend/coffee_users");
+    const roman = repo.getUser("rabend");
+
+    const json = JSON.stringify(roman);
 
     res.writeHead(200, {
         "content-type": "application/json"
