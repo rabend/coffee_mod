@@ -1,23 +1,25 @@
-const http = require('http');
+const express = require('express');
 const Repository = require('./repository.js');
+const bodyParser = require('body-parser');
 
-const server = http.createServer((req, res) => {
-    const data = {
-        body: ["Coffee", "Latte", "Cappucino"]
-    };
+const app = express();
+const repo = new Repository("//home/rabend/coffee_users");
 
-    const repo = new Repository("/home/rabend/coffee_users");
-    const roman = repo.getUser("rabend");
+app.use(bodyParser.json());
+
+app.get('/getUser', (req, res) => {
+    const userName = req.query.userName;
+    const roman = repo.getUser(userName);
 
     const json = JSON.stringify(roman);
-
-    res.writeHead(200, {
-        "content-type": "application/json"
-    });
-    res.write(json);
-    res.end();
+    res.send(json);
 });
 
-server.listen(3000, () => {
+app.post('/', (req, res) => {
+    const data = req.body;
+    repo.saveUser(data);
+});
+
+app.listen(3000, () => {
     console.log("Server listening on port 3000");
 });

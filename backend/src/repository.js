@@ -7,8 +7,9 @@ module.exports = class Repository {
      }
 
      saveUser(user) {
+         const userFile = path.resolve(this.database, user.name);
          const userData = JSON.stringify(user);
-         fs.appendFile(this.database, userData);
+         fs.appendFile(userFile, userData);
      }
 
      getUser(username) {
