@@ -3,15 +3,16 @@ const Repository = require('./repository.js');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-const rootPath = "/home/rabend/projects/coffee_mod/";
+const rootFolder = path.join(__dirname, '../../');
 const app = express();
-const repo = new Repository("/home/rabend/coffee_users");
+debugger;
+const repo = new Repository(path.join(rootFolder, "coffee_users"));
 
 app.use(bodyParser.json());
-app.use(express.static(rootPath));
+app.use(express.static(rootFolder));
 
 app.get('/', (req, res) => {
-    const main = path.resolve(rootPath, 'frontend/', 'lib/','main.html');
+    const main = path.resolve(rootFolder, 'frontend/', 'lib/','main.html');
     res.header('content-type', 'text/html');
     res.status(200);
     res.sendfile(main);
@@ -33,7 +34,6 @@ app.post('/api/saveUser', (req, res) => {
 });
 
 app.post('/api/incrementBeverage', (req, res) => {
-    debugger;
     const userName = req.body.userName;
     repo.incrementBeverageCount(userName);
     res.sendStatus(200);

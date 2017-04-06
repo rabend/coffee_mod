@@ -4,6 +4,9 @@ const path = require('path');
 module.exports = class Repository {
     constructor(database) {
         this.database = database;
+        if (!fs.exists(database)) {
+            fs.mkdirSync(database);
+        }
     }
 
     saveUser(user) {
