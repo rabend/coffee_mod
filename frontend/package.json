@@ -4,7 +4,10 @@
   "description": "tarent's very own token-coffee-machine interface",
   "main": "index.js",
   "babel": {
-    "presets": ["react", "es2015"]
+    "presets": [
+      "react",
+      "es2015"
+    ]
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -14,8 +17,10 @@
   "author": "Roman Abendroth",
   "license": "ISC",
   "dependencies": {
+    "ajax-request": "^1.2.1",
     "react": "^15.4.2",
-    "react-dom": "^15.4.2"
+    "react-dom": "^15.4.2",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.24.0",
