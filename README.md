@@ -9,8 +9,8 @@ In the form of a raspberry pi, our trusty access tokens and a lil bit of JS and 
 </p>
 <h3>The idea</h3>
 <p>
-First off, we need a way for everyone to save their preferred coffee configuration. We achieve this by building a leightweight webapp using ReactJS and NodeJS. We save the configuration and link each configuration to an LDAP account and a user access token. <br>
-Then we start with the Raspi; we need to get our hands on a token reader and some jumper cables. With some python scripting we can call our NodeJS api, request the configuration for the user who just scanned his access token and then use the GPIO-pins of the Pi to controll the coffee machine and make a custom tailored coffee.<br>
+First off, we need a way for everyone to save their preferred coffee configuration. We achieve this by building a lightweight webapp using ReactJS and NodeJS. We save the configuration and link each configuration to an LDAP account and a user access token. <br>
+Then we start with the Raspi; we need to get our hands on a token reader and some jumper cables. With some python scripting we can call our NodeJS API, request the configuration for the user who just scanned his access token and then use the GPIO-pins of the Pi to controll the coffee machine and make a custom tailored coffee.<br>
 We also want to keep track of who drinks how much coffee, to maybe display a ranking of caffeine addicts.
 </p>
 <h3>The HAVEs</h3>
@@ -26,7 +26,7 @@ We also want to keep track of who drinks how much coffee, to maybe display a ran
 - A token reader and access to its data output<br>
 - Secure the webbapp<br>
 - Implement an LDAP authentication against our LDAP server (Passport Strategy)<br>
-- The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)
+- The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)<br>
 - Some nice looking CSS to implement tarent's CI on the webapp?<br>
 - Python script to control the coffee machine through GPIO pins
 </p>
