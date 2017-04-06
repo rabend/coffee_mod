@@ -17,7 +17,7 @@ module.exports = class Repository {
             user.beverageCount = persistedData.beverageCount + 1;
             fs.unlinkSync(userFile);
         } else {
-            user.beverageCount = 1;
+            user.beverageCount = 0;
         }
 
         const userData = JSON.stringify(user);
