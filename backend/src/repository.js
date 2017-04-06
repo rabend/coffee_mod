@@ -4,7 +4,8 @@ const path = require('path');
 module.exports = class Repository {
     constructor(database) {
         this.database = database;
-        if (!fs.exists(database)) {
+        debugger;
+        if (!fs.existsSync(database)) {
             fs.mkdirSync(database);
         }
     }

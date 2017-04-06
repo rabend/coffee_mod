@@ -1,7 +1,7 @@
 import sys, getopt, requests
 
 def main(argv):
-    username = ''
+    username = ""
     try:
         opts, args = getopt.getopt(argv, "hu:")
     except getopt.GetoptError:
@@ -11,13 +11,12 @@ def main(argv):
             username = arg
             if username == "":
                 sys.exit(2)
-            user = {"userName" : username}
-            r = requests.post('http://localhost:3000/api/incrementBeverage', json = user)
-            print r.text
+            res = requests.get("http://localhost:3000/api/getUser?userName=" + username)
+            print res.text
         elif opt == "-h":
-            print "Usage: <script> -u <UserName>"
+            print "Usage: <script> -u <username>"
         else:
             print "Usage only with arguments!"
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main(sys.argv[1:])
