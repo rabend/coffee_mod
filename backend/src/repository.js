@@ -8,6 +8,11 @@ module.exports = class Repository {
 
      saveUser(user) {
          const userFile = path.resolve(this.database, user.name);
+
+         if (fs.existsSync(userFile)) {
+             fs.unlinkSync(userFile);
+         }
+
          const userData = JSON.stringify(user);
          fs.appendFile(userFile, userData);
      }

@@ -13,6 +13,7 @@ app.use(express.static(rootPath));
 app.get('/', (req, res) => {
     const main = path.resolve(rootPath, 'frontend/', 'lib/','main.html');
     res.header('content-type', 'text/html');
+    res.status(200);
     res.sendfile(main);
 });
 
@@ -21,13 +22,14 @@ app.get('/api/getUser', (req, res) => {
     const roman = repo.getUser(userName);
 
     const json = JSON.stringify(roman);
+    res.status(200);
     res.send(json);
 });
 
 app.post('/api/saveUser', (req, res) => {
-    debugger;
     const data = req.body;
     repo.saveUser(data);
+    res.sendStatus(200);
 });
 
 app.listen(3000, () => {

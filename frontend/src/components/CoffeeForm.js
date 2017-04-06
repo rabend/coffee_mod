@@ -9,11 +9,11 @@ export default class CoffeeForm extends React.Component {
         super(props);
 
         this.state = {
-            coffeeChoices: ["Coffee", "Latte"],
+            coffeeChoices: ["Coffee", "Latte", "Cappuccino"],
             strengthChoices: [1, 2, 3, 4, 5],
             name: "TestUser",
-            selectedCoffee: "Standard",
-            selectedStrength: "Standard",
+            selectedCoffee: "Coffee",
+            selectedStrength: 3,
         };
     }
 
@@ -31,7 +31,6 @@ export default class CoffeeForm extends React.Component {
 
     sendCoffeeSetup(event) {
         event.preventDefault();
-        //AJAX POST call to backend here
         const data = {
             name: this.state.name,
             selectedCoffee: this.state.selectedCoffee,
@@ -46,9 +45,6 @@ export default class CoffeeForm extends React.Component {
             },
             body: JSON.stringify(data)
         });
-
-        console.log(data);
-        console.log("The configration has been saved!");
     }
 
     render() {
