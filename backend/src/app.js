@@ -1,13 +1,22 @@
 const express = require('express');
 const Repository = require('./repository.js');
 const bodyParser = require('body-parser');
+const path = require('path');
 
+const rootPath = "/home/rabend/projects/coffee_mod/";
 const app = express();
-const repo = new Repository("//home/rabend/coffee_users");
+const repo = new Repository("/home/rabend/coffee_users");
 
 app.use(bodyParser.json());
+app.use(express.static(rootPath));
 
-app.get('/getUser', (req, res) => {
+app.get('/', (req, res) => {
+    const main = path.resolve(rootPath, 'frontend/', 'lib/','main.html');
+    res.header('content-type', 'text/html');
+    res.sendfile(main);
+});
+
+app.get('/api/getUser', (req, res) => {
     const userName = req.query.userName;
     const roman = repo.getUser(userName);
 
@@ -15,7 +24,7 @@ app.get('/getUser', (req, res) => {
     res.send(json);
 });
 
-app.post('/', (req, res) => {
+app.post('/api/saveUser', (req, res) => {
     const data = req.body;
     repo.saveUser(data);
 });
