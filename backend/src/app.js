@@ -19,9 +19,9 @@ app.get('/', (req, res) => {
 
 app.get('/api/getUser', (req, res) => {
     const userName = req.query.userName;
-    const roman = repo.getUser(userName);
+    const user = repo.getUser(userName);
 
-    const json = JSON.stringify(roman);
+    const json = JSON.stringify(user);
     res.status(200);
     res.send(json);
 });
@@ -29,6 +29,13 @@ app.get('/api/getUser', (req, res) => {
 app.post('/api/saveUser', (req, res) => {
     const data = req.body;
     repo.saveUser(data);
+    res.sendStatus(200);
+});
+
+app.post('/api/incrementBeverage', (req, res) => {
+    debugger;
+    const userName = req.body.userName;
+    repo.incrementBeverageCount(userName);
     res.sendStatus(200);
 });
 
