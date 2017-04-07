@@ -1,4 +1,4 @@
-import sys, getopt, requests
+import sys, getopt, requests, os, incrementBeverageCounter
 
 def main(argv):
     username = ""
@@ -12,7 +12,9 @@ def main(argv):
             if username == "":
                 sys.exit(2)
             res = requests.get("http://localhost:3000/api/getUser?userName=" + username)
-            print res.text
+            userdata = res.json()
+            name = userdata["name"]
+            incrementBeverageCounter.main(name)
         elif opt == "-h":
             print "Usage: <script> -u <username>"
         else:

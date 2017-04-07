@@ -5,7 +5,6 @@ const path = require('path');
 
 const rootFolder = path.join(__dirname, '../../');
 const app = express();
-debugger;
 const repo = new Repository(path.join(rootFolder, "coffee_users"));
 
 app.use(bodyParser.json());

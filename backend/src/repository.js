@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = class Repository {
     constructor(database) {
         this.database = database;
-        debugger;
         if (!fs.existsSync(database)) {
             fs.mkdirSync(database);
         }
@@ -14,7 +13,7 @@ module.exports = class Repository {
         const userFile = path.resolve(this.database, user.name);
 
         if (fs.existsSync(userFile)) {
-            let persistedData = JSON.parse(fs.readFileSync(userFile));
+            const persistedData = JSON.parse(fs.readFileSync(userFile));
             user.beverageCount = persistedData.beverageCount + 1;
             fs.unlinkSync(userFile);
         } else {
