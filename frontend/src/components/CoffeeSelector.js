@@ -29,7 +29,7 @@ export default class CoffeeSelector extends React.Component {
     }
     render() {
         return (
-            <select className="coffeSelector" value={this.state.value} onChange={this.handleChange}>
+            <select className="coffeeSelector" value={this.state.value} onChange={this.handleChange}>
                 {this.renderCoffeeOptions()}
             </select>
         );
