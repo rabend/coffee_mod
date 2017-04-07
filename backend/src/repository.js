@@ -13,8 +13,7 @@ module.exports = class Repository {
         const userFile = path.resolve(this.database, user.name);
 
         if (fs.existsSync(userFile)) {
-            const persistedData = JSON.parse(fs.readFileSync(userFile));
-            user.beverageCount = persistedData.beverageCount + 1;
+            JSON.parse(fs.readFileSync(userFile));
             fs.unlinkSync(userFile);
         } else {
             user.beverageCount = 0;

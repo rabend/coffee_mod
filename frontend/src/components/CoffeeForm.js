@@ -19,18 +19,55 @@ export default class CoffeeForm extends React.Component {
     }
 
     handleNameChange(event) {
-        this.setState({name: event.target.value});
+        this.setState({
+            name: event.target.value,
+            message: undefined,
+        });
     }
 
     handleCoffeeChange(event) {
-        this.setState({selectedCoffee: event.target.value});
+        this.setState({
+            selectedCoffee: event.target.value,
+            message: undefined,
+        });
     }
 
     handleMilkChange(event) {
-        this.setState({selectedMilk: event.target.value});
+        this.setState({
+            selectedMilk: event.target.value,
+            message: undefined,
+        });
     }
+
     handleStrengthChanged(event) {
-        this.setState({selectedStrength: event.target.value});
+        this.setState({
+            selectedStrength: event.target.value,
+            message: undefined,
+        });
+    }
+
+    getOldConfig(value) {
+        this.setState({value});
+        fetch('http://localhost:3000/api/getUser?userName=' + value, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => response.json())
+          .then((responseJson) => {
+              debugger;
+              this.setState({
+                  message: undefined,
+                  name: responseJson.name,
+                  selectedCoffee: responseJson.selectedCoffee,
+                  selectedMilk: responseJson.selectedMilk,
+                  selectedStrength: responseJson.selectedStrength,
+              });
+            })
+            .catch((error) => {
+                throw error;
+            });
     }
 
     sendCoffeeSetup(event) {
@@ -42,6 +79,9 @@ export default class CoffeeForm extends React.Component {
             selectedMilk: this.state.selectedMilk,
         };
 
+        const errorMsg = <div><label className="errorMessage">Something went wrong :(</label></div>;
+        const successMsg = <div><label className="successMessage">Your config has been sent!</label></div>;
+
         fetch('http://localhost:3000/api/saveUser', {
             method: 'POST',
             headers: {
@@ -49,16 +89,30 @@ export default class CoffeeForm extends React.Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(data)
-        });
+        }).then((response) => {
+            if (response.status === 200) {
+                this.setState({
+                    message: successMsg
+                });
+            } else {
+                throw errorMsg;
+            }
+        }).catch((error) => {
+            this.setState({
+                message: error
+            })
+        })
     }
 
     render() {
         return (
             <div>
+                {this.state.message}
                 <label>Select your personal coffee configuration:</label>
                 <form onSubmit={this.sendCoffeeSetup.bind(this)}>
                     <UserNameTextField value={this.state.name}
-                                       onChange={this.handleNameChange.bind(this)}/>
+                                       onChange={this.handleNameChange.bind(this)}
+                                       onClick={this.getOldConfig.bind(this)}/>
                     <CoffeeSelector label="Select Milliliters:"
                                     values={this.state.coffeeMilliliters}
                                     defaultValue={this.state.selectedCoffee}
@@ -74,6 +128,6 @@ export default class CoffeeForm extends React.Component {
                     <input type="submit" value="Send it!"/>
                 </form>
             </div>
-        )
+        );
     }
 }
