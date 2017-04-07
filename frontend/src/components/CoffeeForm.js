@@ -71,36 +71,42 @@ export default class CoffeeForm extends React.Component {
 
     sendCoffeeSetup(event) {
         event.preventDefault();
-        const data = {
-            name: this.state.name,
-            selectedCoffee: this.state.selectedCoffee,
-            selectedStrength: this.state.selectedStrength,
-            selectedMilk: this.state.selectedMilk,
-        };
-
-        const errorMsg = <div><label className="errorMessage">Something went wrong :(</label></div>;
-        const successMsg = <div><label className="successMessage">Your config has been sent!</label></div>;
-
-        fetch('http://localhost:3000/api/saveUser', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        }).then((response) => {
-            if (response.status === 200) {
-                this.setState({
-                    message: successMsg
-                });
-            } else {
-                throw errorMsg;
-            }
-        }).catch((error) => {
+        if (this.state.name === undefined || this.state.name === "") {
             this.setState({
-                message: error
-            })
-        });
+                message: <div><label>Please enter a user name!</label></div>
+            });
+        } else {
+            const data = {
+                name: this.state.name,
+                selectedCoffee: this.state.selectedCoffee,
+                selectedStrength: this.state.selectedStrength,
+                selectedMilk: this.state.selectedMilk,
+            };
+
+            const errorMsg = <div><label className="errorMessage">Something went wrong :(</label></div>;
+            const successMsg = <div><label className="successMessage">Your config has been sent!</label></div>;
+
+            fetch('http://localhost:3000/api/saveUser', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then((response) => {
+                if (response.status === 200) {
+                    this.setState({
+                        message: successMsg
+                    });
+                } else {
+                    throw errorMsg;
+                }
+            }).catch((error) => {
+                this.setState({
+                    message: error
+                })
+            });
+        }
     }
 
     render() {
