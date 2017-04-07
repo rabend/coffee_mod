@@ -13,7 +13,7 @@ app.use(express.static(rootFolder));
 app.get('/', (req, res) => {
     const main = path.resolve(rootFolder, 'frontend/', 'lib/','main.html');
     res.header('content-type', 'text/html');
-    res.status(200).sendfile(main);
+    res.status(200).sendFile(main);
 });
 
 app.get('/api/getUser', (req, res) => {

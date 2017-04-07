@@ -16,7 +16,6 @@ export default class CoffeeSelector extends React.Component {
         this.setState({
             value: nextProps.defaultValue,
         });
-        console.log("new props set");
     }
 
     renderCoffeeOptions() {

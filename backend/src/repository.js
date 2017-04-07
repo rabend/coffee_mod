@@ -20,7 +20,11 @@ module.exports = class Repository {
         }
 
         const userData = JSON.stringify(user);
-        fs.appendFileSync(userFile, userData);
+        fs.appendFile(userFile, userData, (err) => {
+            if (err) {
+                console.log("Data could not be written to file", err);
+            }
+        });
     }
 
     getUser(userName) {

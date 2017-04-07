@@ -115,18 +115,15 @@ export default class CoffeeForm extends React.Component {
                     <CoffeeSelector label="Select Milliliters:"
                                     values={this.state.coffeeMilliliters}
                                     defaultValue={this.state.selectedCoffee}
-                                    onChange={this.handleCoffeeChange.bind(this)}
-                                    key={1}/>
+                                    onChange={this.handleCoffeeChange.bind(this)}/>
                     <CoffeeSelector label="Select Milk Milliliters:"
                                     values={this.state.milkMilliliters}
                                     defaultValue={this.state.selectedMilk}
-                                    onChange={this.handleMilkChange.bind(this)}
-                                    key={2}/>
+                                    onChange={this.handleMilkChange.bind(this)}/>
                     <CoffeeSelector label="Select Coffee Strength:"
                                     values={this.state.strengthChoices}
                                     defaultValue={this.state.selectedStrength}
-                                    onChange={this.handleStrengthChanged.bind(this)}
-                                    key={3}/>
+                                    onChange={this.handleStrengthChanged.bind(this)}/>
                     <input type="submit" value="Send it!"/>
                 </form>
             </div>
