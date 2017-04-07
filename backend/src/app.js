@@ -13,8 +13,7 @@ app.use(express.static(rootFolder));
 app.get('/', (req, res) => {
     const main = path.resolve(rootFolder, 'frontend/', 'lib/','main.html');
     res.header('content-type', 'text/html');
-    res.status(200);
-    res.sendfile(main);
+    res.status(200).sendfile(main);
 });
 
 app.get('/api/getUser', (req, res) => {
@@ -22,8 +21,7 @@ app.get('/api/getUser', (req, res) => {
     const user = repo.getUser(userName);
 
     const json = JSON.stringify(user);
-    res.status(200);
-    res.send(json);
+    res.status(200).send(json);
 });
 
 app.post('/api/saveUser', (req, res) => {

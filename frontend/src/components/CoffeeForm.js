@@ -47,7 +47,6 @@ export default class CoffeeForm extends React.Component {
     }
 
     getOldConfig(value) {
-        this.setState({value});
         fetch('http://localhost:3000/api/getUser?userName=' + value, {
             method: 'GET',
             headers: {
@@ -57,7 +56,7 @@ export default class CoffeeForm extends React.Component {
         }).then((response) => response.json())
           .then((responseJson) => {
               this.setState({
-                  message: undefined,
+                  message: <div><label>Config was loaded!</label></div>,
                   name: responseJson.name,
                   selectedCoffee: responseJson.selectedCoffee,
                   selectedMilk: responseJson.selectedMilk,
@@ -65,6 +64,7 @@ export default class CoffeeForm extends React.Component {
               });
             })
             .catch((error) => {
+                console.log(error);
                 throw error;
             });
     }
@@ -115,15 +115,18 @@ export default class CoffeeForm extends React.Component {
                     <CoffeeSelector label="Select Milliliters:"
                                     values={this.state.coffeeMilliliters}
                                     defaultValue={this.state.selectedCoffee}
-                                    onChange={this.handleCoffeeChange.bind(this)}/>
+                                    onChange={this.handleCoffeeChange.bind(this)}
+                                    key={1}/>
                     <CoffeeSelector label="Select Milk Milliliters:"
                                     values={this.state.milkMilliliters}
                                     defaultValue={this.state.selectedMilk}
-                                    onChange={this.handleMilkChange.bind(this)}/>
+                                    onChange={this.handleMilkChange.bind(this)}
+                                    key={2}/>
                     <CoffeeSelector label="Select Coffee Strength:"
                                     values={this.state.strengthChoices}
                                     defaultValue={this.state.selectedStrength}
-                                    onChange={this.handleStrengthChanged.bind(this)}/>
+                                    onChange={this.handleStrengthChanged.bind(this)}
+                                    key={3}/>
                     <input type="submit" value="Send it!"/>
                 </form>
             </div>

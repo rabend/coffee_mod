@@ -12,6 +12,13 @@ export default class CoffeeSelector extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            value: nextProps.defaultValue,
+        });
+        console.log("new props set");
+    }
+
     renderCoffeeOptions() {
         const options = [];
 
