@@ -56,7 +56,6 @@ export default class CoffeeForm extends React.Component {
             }
         }).then((response) => response.json())
           .then((responseJson) => {
-              debugger;
               this.setState({
                   message: undefined,
                   name: responseJson.name,
@@ -101,7 +100,7 @@ export default class CoffeeForm extends React.Component {
             this.setState({
                 message: error
             })
-        })
+        });
     }
 
     render() {
