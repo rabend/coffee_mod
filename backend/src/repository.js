@@ -13,7 +13,16 @@ module.exports = class Repository {
         const userFile = path.resolve(this.database, user.name);
 
         if (fs.existsSync(userFile)) {
-            JSON.parse(fs.readFileSync(userFile));
+            const persistedUser = JSON.parse(fs.readFileSync(userFile));
+
+            if(persistedUser.tokenHash !== undefined) {
+                user.tokenHash = persistedUser.tokenHash
+            }
+
+            if (persistedUser.beverageCount !== undefined) {
+                user.beverageCount = persistedUser.beverageCount
+            }
+
             fs.unlinkSync(userFile);
         } else {
             user.beverageCount = 0;
@@ -35,9 +44,11 @@ module.exports = class Repository {
 
     getUserByTokenHash(tokenHash) {
         const userFiles = fs.readdirSync(this.database);
+        debugger;
         const users = [];
         for (let i = 0; i < userFiles.length; i++) {
-            users.push(JSON.parse(fs.readFileSync(userFiles[i])));
+            const userFile = path.resolve(this.database, userFiles[i]);
+            users.push(JSON.parse(fs.readFileSync(userFile)));
         }
         for(let i = 0; i < users.length; i++) {
             if (users[i].tokenHash === tokenHash) {
