@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const readdirp = require('readdirp');
 
 module.exports = class Repository {
     constructor(database) {
@@ -43,13 +44,12 @@ module.exports = class Repository {
     }
 
     getUserByTokenHash(tokenHash) {
-        const userFiles = fs.readdirSync(this.database);
-        debugger;
         const users = [];
-        for (let i = 0; i < userFiles.length; i++) {
-            const userFile = path.resolve(this.database, userFiles[i]);
-            users.push(JSON.parse(fs.readFileSync(userFile)));
-        }
+        readdirp(this.database)
+            .on('data', (userFile) => {
+                users.push(JSON.parse(fs.readFileSync(userFile)));
+            });
+
         for(let i = 0; i < users.length; i++) {
             if (users[i].tokenHash === tokenHash) {
                 return users[i];

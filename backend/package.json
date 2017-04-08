@@ -12,6 +12,10 @@
   "dependencies": {
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "readdirp": "^2.1.0"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.1"
   }
 }
