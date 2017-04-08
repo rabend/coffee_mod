@@ -33,6 +33,20 @@ module.exports = class Repository {
         return JSON.parse(userData);
     }
 
+    getUserByTokenHash(tokenHash) {
+        const userFiles = fs.readdirSync(this.database);
+        const users = [];
+        for (let i = 0; i < userFiles.length; i++) {
+            users.push(JSON.parse(fs.readFileSync(userFiles[i])));
+        }
+        for(let i = 0; i < users.length; i++) {
+            if (users[i].tokenHash === tokenHash) {
+                return users[i];
+            }
+        }
+        throw "No matching user data found!";
+    }
+
     incrementBeverageCount(userName) {
         const userFile = path.resolve(this.database, userName);
 

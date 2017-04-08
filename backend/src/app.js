@@ -24,6 +24,12 @@ app.get('/api/getUser', (req, res) => {
     res.status(200).send(json);
 });
 
+app.get('/api/getUserByTokenHash', (req, res)=>{
+    const tokenHash = req.query.tokenHash;
+    const user = repo.getUserByTokenHash(tokenHash);
+    res.status(200).send(JSON.stringify(user));
+})
+
 app.post('/api/saveUser', (req, res) => {
     const data = req.body;
     repo.saveUser(data);
