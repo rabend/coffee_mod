@@ -13,20 +13,49 @@ module.exports = class Repository {
         const userFile = path.resolve(this.database, user.name);
 
         if (fs.existsSync(userFile)) {
-            JSON.parse(fs.readFileSync(userFile));
+            const persistedUser = JSON.parse(fs.readFileSync(userFile));
+
+            if(persistedUser.tokenHash !== undefined) {
+                user.tokenHash = persistedUser.tokenHash
+            }
+
+            if (persistedUser.beverageCount !== undefined) {
+                user.beverageCount = persistedUser.beverageCount
+            }
+
             fs.unlinkSync(userFile);
         } else {
             user.beverageCount = 0;
         }
 
         const userData = JSON.stringify(user);
-        fs.appendFileSync(userFile, userData);
+        fs.appendFile(userFile, userData, (err) => {
+            if (err) {
+                console.log("Data could not be written to file", err);
+            }
+        });
     }
 
     getUser(userName) {
         const userFile = path.resolve(this.database, userName);
         const userData = fs.readFileSync(userFile);
         return JSON.parse(userData);
+    }
+
+    getUserByTokenHash(tokenHash) {
+        const userFiles = fs.readdirSync(this.database);
+        debugger;
+        const users = [];
+        for (let i = 0; i < userFiles.length; i++) {
+            const userFile = path.resolve(this.database, userFiles[i]);
+            users.push(JSON.parse(fs.readFileSync(userFile)));
+        }
+        for(let i = 0; i < users.length; i++) {
+            if (users[i].tokenHash === tokenHash) {
+                return users[i];
+            }
+        }
+        throw "No matching user data found!";
     }
 
     incrementBeverageCount(userName) {

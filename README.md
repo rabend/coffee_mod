@@ -30,3 +30,8 @@ We also want to keep track of who drinks how much coffee, to maybe display a ran
 - Some nice looking CSS to implement tarent's CI on the webapp?<br>
 - Python script to control the coffee machine through GPIO pins
 </p>
+<h3>How to install</h3>
+<p>
+Simply cd into the frontend folder and run npm install, followed by npm run build. This browserifies the frontend parts.<br>
+To start the server just cd into the backend folder and run node src/app.js
+</p>
