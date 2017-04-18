@@ -1,0 +1,315 @@
+/*
+    CSS reset
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+
+/*
+    Basics
+*/
+html {
+    background-image: url("/frontend/src/ressources/wood.jpg");
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1em;
+}
+
+body > div {
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: center;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    display: flex;
+    background: #fff url("/frontend/src/ressources/ic_keyboard_arrow_down_black_24dp_1x.png") no-repeat;
+    background-position:  right 2px center;
+    font-size: .9em;
+    border-radius: .1em;
+    border: 1px solid grey;
+    padding: .3em .5em;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.content > div {
+    color: rgba(0,0,0,.87);
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #eee;
+    border-radius: .1em;
+    text-align: center;
+    display: inline-block;
+    margin: 1em;
+    min-width: 25em;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 2em;
+}
+
+.greetingContainer {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2em;
+}
+
+.heading {
+    color: rgba(0,0,0,.87);
+    font-size: 1.2em;
+    margin: 0.5em 0 2em 0;
+    display: block;
+}
+
+
+
+/*
+    Username visualization
+*/
+.userNameContainer {
+    display: flex;
+    align-content: center;
+    position: absolute;
+    top: .5em;
+    right: .5em;
+}
+
+.userNameTextField {
+    color: rgba(0,0,0,.54);
+    font-size: .8em !important;
+    font-weight:bold;
+    text-align: right;
+    font-size: 1em;
+    background: none;
+    border: none;
+    box-sizing: border-box;
+}
+
+.userNameContainer i {
+    font-size: 1.4em;
+    margin-left: .2em;
+    cursor: default;
+}
+
+
+
+/*
+    Form elements
+*/
+form > div {
+    margin: .5em;
+    display: flex;
+    align-content: center;
+}
+
+form > div > label {
+    display: flex;
+    flex: 1;
+    color: rgba(0,0,0,.87);
+    line-height: 1.5em;
+    margin-bottom: .5em;
+    margin-right: 1em;
+    display:inline-block;
+    text-align: right;
+}
+
+.coffeeOptionsContainer {
+    flex: 1;
+    align-content: left;
+}
+
+.formButtonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.formButton {
+    display: flex;
+    border-radius: .1em;
+    font-size:.9em;
+    padding: .4em;
+    text-decoration:none; 
+    text-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+    color: #FFFFFF;
+}
+
+.submitButton {
+    border: 1px solid #91b41a;
+    font-weight:bold; 
+    padding: .4em 1.2em;
+    background-color: #b6e026;
+    background-image: linear-gradient(to bottom, #b6e026, #abdc28);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#b6e026, endColorstr=#abdc28);
+}
+
+.submitButton:hover {
+    border: 1px solid #718c14;
+    background-color: #95b91a;
+    background-image: linear-gradient(to bottom, #95b91a, #8bb41d);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#95b91a, endColorstr=#8bb41d);
+}
+
+.getOldConfigButton {
+    cursor: default;
+    margin-right: 1em;
+    border: 1px solid #15aeec;
+    background-color: #49c0f0;
+    background-image: linear-gradient(to bottom, #49c0f0, #2CAFE3);
+    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#49c0f0, endColorstr=#2CAFE3);
+}
+
+.getOldConfigButton:hover {
+    border: 1px solid #1090c3;
+    background-color: #1ab0ec;
+    background-image: linear-gradient(to bottom, #1ab0ec, #1a92c2);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#95b91a, endColorstr=#8bb41d);
+}
+
+.getOldConfigButton:hover > i {
+    transition: all .5s ease;
+}
+
+.getOldConfigButton:hover > i {
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+
+    transform: rotate(-180deg);
+}
+
+.coffeeSelector {
+    width: 5em;
+    transition: all .3s ease;
+}
+
+.coffeeSelector:hover {
+    border-color: rgba(0,0,0,.7);
+}
+
+
+
+/*
+    Info Messages 
+*/
+.hidden {
+    opacity: 0 !important;
+    top: 1em;
+
+    transition: opacity .5s ease;
+}
+
+.info {
+    background-color: #d9edf7 !important;
+    color: #31708f !important; 
+    border: 1px solid #abd7f1;
+    top: 0em;
+    box-sizing: border-box;
+
+    transition: opacity .3s ease;
+}
+
+.error {
+    background-color: #f2dede !important;
+    color: #a94442 !important; 
+    border: 1px solid #dbbcc1;
+    top: 0em;
+    box-sizing: border-box;
+
+    transition: opacity .3s ease;
+}
+
+.warning {
+    background-color: #fcf8e3 !important;
+    color: #8a6d3b !important; 
+    border: 1px solid #eadbbc;
+    top: 0em;
+    box-sizing: border-box;
+
+    transition: opacity .3s ease;
+}
+
+.success {
+    background-color: #dff0d8 !important;
+    color: #3c763d !important; 
+    border: 1px solid #c6d9b6;
+    top: 0em;
+    box-sizing: border-box;
+
+    transition: opacity .3s ease;
+}
+
+
+
+/*
+    Google Material Icons
+*/
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
