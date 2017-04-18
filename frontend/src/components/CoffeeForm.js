@@ -1,7 +1,7 @@
-import React from 'react';
-import CoffeeSelector from "./CoffeeSelector";
-import UserNameTextField from "./UserNameTextField";
-import 'whatwg-fetch';
+import React from 'react'
+import CoffeeSelector from "./CoffeeSelector"
+import UserNameTextField from "./UserNameTextField"
+import 'whatwg-fetch'
 
 export default class CoffeeForm extends React.Component {
     constructor(props) {
@@ -15,6 +15,9 @@ export default class CoffeeForm extends React.Component {
             selectedCoffee: 120,
             selectedMilk: 0,
             selectedStrength: 3,
+            showMessage: false,
+            messageType: "info",
+            reloadIcon: "cached",
         };
     }
 
@@ -56,14 +59,16 @@ export default class CoffeeForm extends React.Component {
         }).then((response) => response.json())
           .then((responseJson) => {
               this.setState({
-                  message: <div><label>Config was loaded!</label></div>,
+                  message: <span>Configuration loaded!</span>,
                   name: responseJson.name,
                   selectedCoffee: responseJson.selectedCoffee,
                   selectedMilk: responseJson.selectedMilk,
                   selectedStrength: responseJson.selectedStrength,
               });
+              this.toggleMessage("info");
             })
             .catch((error) => {
+                this.toggleMessage("error");
                 console.log(error);
                 throw error;
             });
@@ -73,8 +78,9 @@ export default class CoffeeForm extends React.Component {
         event.preventDefault();
         if (this.state.name === undefined || this.state.name === "") {
             this.setState({
-                message: <div><label>Please enter a user name!</label></div>
+                message: <span>Please enter a user name!</span>
             });
+            this.toggleMessage("warning");
         } else {
             const data = {
                 name: this.state.name,
@@ -83,8 +89,8 @@ export default class CoffeeForm extends React.Component {
                 selectedMilk: this.state.selectedMilk,
             };
 
-            const errorMsg = <div><label className="errorMessage">Something went wrong :(</label></div>;
-            const successMsg = <div><label className="successMessage">Your config has been sent!</label></div>;
+            const errorMsg = <span>Something went wrong :(</span>;
+            const successMsg = <span>Configuration saved!</span>;
 
             fetch('http://localhost:3000/api/saveUser', {
                 method: 'POST',
@@ -98,40 +104,58 @@ export default class CoffeeForm extends React.Component {
                     this.setState({
                         message: successMsg
                     });
+                    this.toggleMessage("success");
                 } else {
                     throw errorMsg;
                 }
             }).catch((error) => {
                 this.setState({
                     message: error
-                })
+                });
+                this.toggleMessage("error");
             });
+            
         }
+    }
+
+    toggleMessage(currentMessageType) {
+        this.setState( { messageType : currentMessageType } )
+        this.setState( { showMessage : true } );
+        setTimeout(() => {this.setState( { showMessage : false } )}, 3000);
     }
 
     render() {
         return (
-            <div>
-                {this.state.message}
-                <label>Select your personal coffee configuration:</label>
-                <form onSubmit={this.sendCoffeeSetup.bind(this)}>
-                    <UserNameTextField value={this.state.name}
-                                       onChange={this.handleNameChange.bind(this)}
-                                       onClick={this.getOldConfig.bind(this)}/>
-                    <CoffeeSelector label="Select Milliliters:"
-                                    values={this.state.coffeeMilliliters}
-                                    defaultValue={this.state.selectedCoffee}
-                                    onChange={this.handleCoffeeChange.bind(this)}/>
-                    <CoffeeSelector label="Select Milk Milliliters:"
-                                    values={this.state.milkMilliliters}
-                                    defaultValue={this.state.selectedMilk}
-                                    onChange={this.handleMilkChange.bind(this)}/>
-                    <CoffeeSelector label="Select Coffee Strength:"
-                                    values={this.state.strengthChoices}
-                                    defaultValue={this.state.selectedStrength}
-                                    onChange={this.handleStrengthChanged.bind(this)}/>
-                    <input type="submit" value="Send it!"/>
-                </form>
+            <div className="content">
+                <div id="header">Welcome to /coffee_mod!
+                    <UserNameTextField value={this.state.name} 
+                                       onChange={this.handleNameChange.bind(this)} />
+                </div>
+                <div>
+                    <form onSubmit={this.sendCoffeeSetup.bind(this)}>
+                        
+                        <span className="heading">My coffee setup</span>
+                        <CoffeeSelector label="Coffee/ml"
+                                        values={this.state.coffeeMilliliters}
+                                        defaultValue={this.state.selectedCoffee}
+                                        onChange={this.handleCoffeeChange.bind(this)}/>
+                        <CoffeeSelector label="Milk/ml"
+                                        values={this.state.milkMilliliters}
+                                        defaultValue={this.state.selectedMilk}
+                                        onChange={this.handleMilkChange.bind(this)}/>
+                        <CoffeeSelector label="Coffee Strength"
+                                        values={this.state.strengthChoices}
+                                        defaultValue={this.state.selectedStrength}
+                                        onChange={this.handleStrengthChanged.bind(this)}/>
+                        <div className="formButtonContainer">
+                            <div className="formButton getOldConfigButton" onClick="" title="Load old setup">
+                                <i className="material-icons md-light">{ this.state.reloadIcon }</i>
+                            </div>
+                            <input className="formButton submitButton" type="submit" value="Save setup!"/>
+                        </div>
+                    </form>
+                </div>
+                <div className={ this.state.showMessage ? this.state.messageType : this.state.messageType + " hidden" }>{ this.state.message }</div>
             </div>
         );
     }

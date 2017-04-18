@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 export default class CoffeeSelector extends React.Component {
     constructor(props) {
@@ -41,9 +41,11 @@ export default class CoffeeSelector extends React.Component {
         return (
             <div>
                 <label>{this.props.label}</label>
-                <select className="coffeSelector" value={this.state.value} onChange={this.handleChange}>
-                    {this.renderCoffeeOptions()}
-                </select>
+                <div className="coffeeOptionsContainer">
+                    <select className="coffeeSelector" value={this.state.value} onChange={this.handleChange}>
+                        {this.renderCoffeeOptions()}
+                    </select>
+                </div>
             </div>
         );
     }
