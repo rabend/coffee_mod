@@ -1,4 +1,6 @@
-/* Css reset */
+/*
+    CSS reset
+*/
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -44,6 +46,10 @@ table {
 }
 
 
+
+/*
+    Basics
+*/
 html {
     background-image: url("/frontend/src/ressources/wood.jpg");
     background-position: center;
@@ -69,7 +75,6 @@ select {
     display: flex;
     background: #fff url("/frontend/src/ressources/ic_keyboard_arrow_down_black_24dp_1x.png") no-repeat;
     background-position:  right 2px center;
-    width: 5em;
     font-size: .9em;
     border-radius: .1em;
     border: 1px solid grey;
@@ -111,6 +116,11 @@ select {
     display: block;
 }
 
+
+
+/*
+    Username visualization
+*/
 .userNameContainer {
     display: flex;
     align-content: center;
@@ -136,14 +146,11 @@ select {
     cursor: default;
 }
 
-.loadConfigButton {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 2em;
-    height: 2em;
-}
 
+
+/*
+    Form elements
+*/
 form > div {
     margin: .5em;
     display: flex;
@@ -227,6 +234,20 @@ form > div > label {
     transform: rotate(-180deg);
 }
 
+.coffeeSelector {
+    width: 5em;
+    transition: all .3s ease;
+}
+
+.coffeeSelector:hover {
+    border-color: rgba(0,0,0,.7);
+}
+
+
+
+/*
+    Info Messages 
+*/
 .hidden {
     opacity: 0 !important;
     top: 1em;
@@ -274,7 +295,11 @@ form > div > label {
     transition: opacity .3s ease;
 }
 
-/* Google Material Icons */
+
+
+/*
+    Google Material Icons
+*/
 /* Rules for sizing the icon. */
 .material-icons.md-18 { font-size: 18px; }
 .material-icons.md-24 { font-size: 24px; }

@@ -25,7 +25,7 @@ export default class UserNameTextField extends React.Component {
     render() {
         return (
             <div className="userNameContainer">
-                <input type="text" className="userNameTextField" value={this.state.value} onChange={this.handleChange}/>
+                <input type="text" className="userNameTextField" value={this.state.value} onChange={this.handleChange} title="Click to change"/>
                 <i className="material-icons md-dark">person</i>
             </div>
         )

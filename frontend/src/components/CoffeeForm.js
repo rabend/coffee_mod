@@ -18,6 +18,7 @@ export default class CoffeeForm extends React.Component {
             showMessage: false,
             messageType: "info",
             reloadIcon: "cached",
+
         };
     }
 
@@ -127,13 +128,13 @@ export default class CoffeeForm extends React.Component {
     render() {
         return (
             <div className="content">
-                <div id="header">Welcome to /coffee_mod!
+                <div id="header">
+                    Welcome to /coffee_mod!
                     <UserNameTextField value={this.state.name} 
                                        onChange={this.handleNameChange.bind(this)} />
                 </div>
                 <div>
                     <form onSubmit={this.sendCoffeeSetup.bind(this)}>
-                        
                         <span className="heading">My coffee setup</span>
                         <CoffeeSelector label="Coffee/ml"
                                         values={this.state.coffeeMilliliters}
@@ -143,7 +144,7 @@ export default class CoffeeForm extends React.Component {
                                         values={this.state.milkMilliliters}
                                         defaultValue={this.state.selectedMilk}
                                         onChange={this.handleMilkChange.bind(this)}/>
-                        <CoffeeSelector label="Coffee Strength"
+                        <CoffeeSelector label="Strength"
                                         values={this.state.strengthChoices}
                                         defaultValue={this.state.selectedStrength}
                                         onChange={this.handleStrengthChanged.bind(this)}/>
