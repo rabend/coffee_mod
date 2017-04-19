@@ -18,7 +18,6 @@ export default class CoffeeForm extends React.Component {
             showMessage: false,
             messageType: "info",
             reloadIcon: "cached",
-
         };
     }
 
@@ -149,7 +148,7 @@ export default class CoffeeForm extends React.Component {
                                         defaultValue={this.state.selectedStrength}
                                         onChange={this.handleStrengthChanged.bind(this)}/>
                         <div className="formButtonContainer">
-                            <div className="formButton getOldConfigButton" onClick="" title="Load old settings">
+                            <div className="formButton getOldConfigButton" onClick={()=>{this.getOldConfig(this.state.name)}} title="Load old settings">
                                 <i className="material-icons md-light">{ this.state.reloadIcon }</i>
                             </div>
                             <input className="formButton submitButton" type="submit" value="Save setup!"/>
