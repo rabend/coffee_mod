@@ -6,6 +6,12 @@ const rmrf = require('rimraf');
 
 const rootFolder = path.resolve(__dirname, '../../');
 const database = path.resolve(rootFolder, 'coffee_users');
+const user = {
+    name: "TestUser", 
+    selectedCoffee:100, 
+    selectedMilk:20, 
+    selectedStrength:3    
+};
 
 describe("The Repository", () => {
         beforeEach((done) => {
@@ -26,25 +32,12 @@ describe("The Repository", () => {
         });
 
         it("should save user data without throwing an error", () => {
-            const user = {
-                name: "test",
-                selectedCoffee: 100,
-                selectedMilk: 20,
-                selectedStrength:5
-            };
-
             const repo = new Repository(database);
             repo.saveUser(user);
         });
 
         it("should get a user by his name", () => {
             const repo = new Repository(database);
-            const user = {
-                name: "TestUser", 
-                selectedCoffee:100, 
-                selectedMilk:20, 
-                selectedStrength:3
-            };
 
             assert.equal("TestUser", user.name);
             repo.saveUser(user);
@@ -52,6 +45,16 @@ describe("The Repository", () => {
             const loadedUser = repo.getUser("TestUser");
 
             assert.deepEqual(loadedUser, user);
-        })
+        });
+
+        it("should find a user by his token hash", () => {
+            const repo = new Repository(database);
+            user.tokenHash = "madeUpTokenHash";
+            repo.saveUser(user);
+
+            const loadedUser = repo.getUserByTokenHash(user.tokenHash);
+
+            assert.deepEqual(user, loadedUser);
+        });
     }
 );

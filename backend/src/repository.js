@@ -44,18 +44,16 @@ module.exports = class Repository {
     }
 
     getUserByTokenHash(tokenHash) {
-        const users = [];
-        readdirp(this.database)
-            .on('data', (userFile) => {
-                users.push(JSON.parse(fs.readFileSync(userFile)));
-            });
-
-        for(let i = 0; i < users.length; i++) {
-            if (users[i].tokenHash === tokenHash) {
-                return users[i];
+        const userFileNames = fs.readdirSync(this.database);
+        
+        for(let i = 0; i < userFileNames.length; i++) {
+            const user = JSON.parse(fs.readFileSync(path.resolve(this.database, userFileNames[i])));
+            if (user.tokenHash === tokenHash) {
+                return user;
             }
         }
-        throw "No matching user data found!";
+
+        throw new Error("No matching user data found!");
     }
 
     incrementBeverageCount(userName) {
