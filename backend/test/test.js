@@ -56,5 +56,13 @@ describe("The Repository", () => {
 
             assert.deepEqual(user, loadedUser);
         });
+
+        it("should throw an error if no user can be found for a token hash", () => {
+            const repo = new Repository(database);
+            user.tokenHash = "madeUpTokenHash";
+            repo.saveUser(user);
+
+            assert.throws(repo.getUserByTokenHash("invalidTokenHash"), "No matching user data found!");
+        });
     }
 );
