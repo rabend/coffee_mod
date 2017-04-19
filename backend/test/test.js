@@ -6,7 +6,7 @@ const rmrf = require('rimraf');
 
 const rootFolder = path.resolve(__dirname, '../../');
 const database = path.resolve(rootFolder, 'coffee_users');
-const user = {
+let user = {
     name: "TestUser", 
     selectedCoffee:100, 
     selectedMilk:20, 
@@ -24,6 +24,15 @@ describe("The Repository", () => {
                 });
             });
         });
+
+        afterEach(() => {
+            user = {
+                name: "TestUser", 
+                selectedCoffee: 100, 
+                selectedMilk: 20, 
+                selectedStrength: 3
+            };
+        })
 
         it("should create a folder 'coffee_users' upon instantiation", () => {
             assert.equal(false, fs.existsSync(database));
@@ -62,7 +71,22 @@ describe("The Repository", () => {
             user.tokenHash = "madeUpTokenHash";
             repo.saveUser(user);
 
-            assert.throws(repo.getUserByTokenHash("invalidTokenHash"), "No matching user data found!");
+            assert.throws(() => {
+                repo.getUserByTokenHash("invalidTokenHash")
+            }, "No matching user data found!");
+        });
+
+        it("should be able to increment the beverage count of a user", () => {
+            const repo = new Repository(database);
+            assert.equal(undefined, user.beverageCount);
+            repo.saveUser(user);
+            let loadedUser = repo.getUser(user.name);
+            assert.equal(0, loadedUser.beverageCount);
+
+            repo.incrementBeverageCount(user.name);
+            loadedUser = repo.getUser(user.name);
+
+            assert.equal(1, loadedUser.beverageCount);
         });
     }
 );
