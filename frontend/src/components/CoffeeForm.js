@@ -20,6 +20,7 @@ export default class CoffeeForm extends React.Component {
             reloadIcon: "cached",
 
         };
+        this.getOldConfig.bind(this);
     }
 
     handleNameChange(event) {
@@ -51,6 +52,7 @@ export default class CoffeeForm extends React.Component {
     }
 
     getOldConfig(value) {
+        debugger;
         fetch('http://localhost:3000/api/getUser?userName=' + value, {
             method: 'GET',
             headers: {
@@ -149,9 +151,9 @@ export default class CoffeeForm extends React.Component {
                                         defaultValue={this.state.selectedStrength}
                                         onChange={this.handleStrengthChanged.bind(this)}/>
                         <div className="formButtonContainer">
-                            <div className="formButton getOldConfigButton" onClick="" title="Load old settings">
+                            <button className="formButton getOldConfigButton" onClick={this.getOldConfig(this.state.name)} title="Load old settings">
                                 <i className="material-icons md-light">{ this.state.reloadIcon }</i>
-                            </div>
+                            </button>
                             <input className="formButton submitButton" type="submit" value="Save setup!"/>
                         </div>
                     </form>

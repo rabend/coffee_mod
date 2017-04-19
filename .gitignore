@@ -3,3 +3,4 @@
 */node_modules/
 coffee_users/
 *.pyc
+.vscode/
