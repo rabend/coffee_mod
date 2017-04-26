@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const readdirp = require('readdirp');
 
 module.exports = class Repository {
     constructor(database) {
