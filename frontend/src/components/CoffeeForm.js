@@ -1,6 +1,7 @@
 import React from 'react'
 import CoffeeSelector from "./CoffeeSelector"
 import UserNameTextField from "./UserNameTextField"
+import MessageBox from "./MessageBox"
 import 'whatwg-fetch'
 
 export default class CoffeeForm extends React.Component {
@@ -15,10 +16,8 @@ export default class CoffeeForm extends React.Component {
             selectedCoffee: 120,
             selectedMilk: 0,
             selectedStrength: 3,
-            showMessage: false,
-            messageType: "info",
             reloadIcon: "cached",
-
+            message: <MessageBox messageType="hidden" />,
         };
         this.getOldConfig.bind(this);
     }
@@ -26,28 +25,24 @@ export default class CoffeeForm extends React.Component {
     handleNameChange(event) {
         this.setState({
             name: event.target.value,
-            message: undefined,
         });
     }
 
     handleCoffeeChange(event) {
         this.setState({
             selectedCoffee: event.target.value,
-            message: undefined,
         });
     }
 
     handleMilkChange(event) {
         this.setState({
             selectedMilk: event.target.value,
-            message: undefined,
         });
     }
 
     handleStrengthChanged(event) {
         this.setState({
             selectedStrength: event.target.value,
-            message: undefined,
         });
     }
 
@@ -61,17 +56,16 @@ export default class CoffeeForm extends React.Component {
         }).then((response) => response.json())
           .then((responseJson) => {
               this.setState({
-                  message: <span>Configuration loaded!</span>,
+                  message: <MessageBox messageType="info"
+                                       messageText="Configuration loaded!"
+                                       removeMessage={ this.removeMessageBox.bind(this) } />,
                   name: responseJson.name,
                   selectedCoffee: responseJson.selectedCoffee,
                   selectedMilk: responseJson.selectedMilk,
                   selectedStrength: responseJson.selectedStrength,
               });
-              this.toggleMessage("info");
             })
             .catch((error) => {
-                this.toggleMessage("error");
-                console.log(error);
                 throw error;
             });
     }
@@ -80,9 +74,10 @@ export default class CoffeeForm extends React.Component {
         event.preventDefault();
         if (this.state.name === undefined || this.state.name === "") {
             this.setState({
-                message: <span>Please enter a user name!</span>
+                message: <MessageBox messageType="warning"
+                                     messageText="Please enter a username!"
+                                     removeMessage={ this.removeMessageBox.bind(this) } />
             });
-            this.toggleMessage("warning");
         } else {
             const data = {
                 name: this.state.name,
@@ -90,9 +85,6 @@ export default class CoffeeForm extends React.Component {
                 selectedStrength: this.state.selectedStrength,
                 selectedMilk: this.state.selectedMilk,
             };
-
-            const errorMsg = <span>Something went wrong :(</span>;
-            const successMsg = <span>Configuration saved!</span>;
 
             fetch('http://localhost:3000/api/saveUser', {
                 method: 'POST',
@@ -104,26 +96,27 @@ export default class CoffeeForm extends React.Component {
             }).then((response) => {
                 if (response.status === 200) {
                     this.setState({
-                        message: successMsg
+                        message: <MessageBox messageType="success"
+                                             messageText="Configuration saved!"
+                                             removeMessage={ this.removeMessageBox.bind(this) } />
                     });
-                    this.toggleMessage("success");
                 } else {
-                    throw errorMsg;
+                    throw new Error("Error");
                 }
             }).catch((error) => {
                 this.setState({
-                    message: error
+                    message: <MessageBox messageType="error"
+                                         messageText="Something went wrong :("
+                                         removeMessage={ this.removeMessageBox.bind(this) } />
                 });
-                this.toggleMessage("error");
             });
             
         }
     }
 
-    toggleMessage(currentMessageType) {
-        this.setState( { messageType : currentMessageType } )
-        this.setState( { showMessage : true } );
-        setTimeout(() => {this.setState( { showMessage : false } )}, 3000);
+    removeMessageBox(messageType, messageText) {
+        setTimeout(() => { this.setState({ message : <MessageBox messageType={ messageType + " hidden" }
+                                                                 messageText={messageText} /> }) }, 3000);
     }
 
     render() {
@@ -150,14 +143,14 @@ export default class CoffeeForm extends React.Component {
                                         defaultValue={this.state.selectedStrength}
                                         onChange={this.handleStrengthChanged.bind(this)}/>
                         <div className="formButtonContainer">
-                            <div className="formButton getOldConfigButton" onClick={()=>{this.getOldConfig(this.state.name)}} title="Load old settings">
+                            <button className="formButton getOldConfigButton" type="button" onClick={()=>{this.getOldConfig(this.state.name)}} title="Load old settings">
                                 <i className="material-icons md-light">{ this.state.reloadIcon }</i>
-                            </div>
+                            </button>
                             <input className="formButton submitButton" type="submit" value="Save setup!"/>
                         </div>
                     </form>
                 </div>
-                <div className={ this.state.showMessage ? this.state.messageType : this.state.messageType + " hidden" }>{ this.state.message }</div>
+                {this.state.message}
             </div>
         );
     }
