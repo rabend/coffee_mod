@@ -29,7 +29,7 @@ module.exports = class Repository {
         }
 
         const userData = JSON.stringify(user);
-        fs.appendFile(userFile, userData, (err) => {
+        fs.appendFileSync(userFile, userData, (err) => {
             if (err) {
                 console.log("Data could not be written to file", err);
             }
@@ -43,19 +43,16 @@ module.exports = class Repository {
     }
 
     getUserByTokenHash(tokenHash) {
-        const userFiles = fs.readdirSync(this.database);
-        debugger;
-        const users = [];
-        for (let i = 0; i < userFiles.length; i++) {
-            const userFile = path.resolve(this.database, userFiles[i]);
-            users.push(JSON.parse(fs.readFileSync(userFile)));
-        }
-        for(let i = 0; i < users.length; i++) {
-            if (users[i].tokenHash === tokenHash) {
-                return users[i];
+        const userFileNames = fs.readdirSync(this.database);
+        
+        for(let i = 0; i < userFileNames.length; i++) {
+            const user = JSON.parse(fs.readFileSync(path.resolve(this.database, userFileNames[i])));
+            if (user.tokenHash === tokenHash) {
+                return user;
             }
         }
-        throw "No matching user data found!";
+
+        throw new Error("No matching user data found!");
     }
 
     incrementBeverageCount(userName) {

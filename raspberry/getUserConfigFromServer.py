@@ -6,6 +6,7 @@ def main(tokenHash):
     print userData
     name = userData["name"]
     makeCoffee.main(userData["selectedCoffee"], userData["selectedMilk"], userData["selectedStrength"])
+    
     incrementBeverageCounter.main(name)
 
 if __name__ == '__main__':

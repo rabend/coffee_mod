@@ -18,7 +18,9 @@ export default class CoffeeForm extends React.Component {
             showMessage: false,
             messageType: "info",
             reloadIcon: "cached",
+
         };
+        this.getOldConfig.bind(this);
     }
 
     handleNameChange(event) {

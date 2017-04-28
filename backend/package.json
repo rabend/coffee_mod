@@ -4,7 +4,7 @@
   "description": "backend application for tarent's very own coffee token device",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "node app.js"
   },
   "author": "Roman Abendroth",
@@ -13,5 +13,9 @@
     "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "passport": "^0.3.2"
+  },
+  "devDependencies": {
+    "mocha": "^3.2.0",
+    "rimraf": "^2.6.1"
   }
 }

@@ -28,7 +28,8 @@ We also want to keep track of who drinks how much coffee, to maybe display a ran
 - Implement an LDAP authentication against our LDAP server (Passport Strategy)<br>
 - The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)<br>
 - Some nice looking CSS to implement tarent's CI on the webapp?<br>
-- Python script to control the coffee machine through GPIO pins
+- Python script to control the coffee machine through GPIO pins<br>
+- Make the backend asynchronous. At the moment we use sync functions to get everything upand running asap, but async functions would be better<br>
 </p>
 <h3>How to install</h3>
 <p>
