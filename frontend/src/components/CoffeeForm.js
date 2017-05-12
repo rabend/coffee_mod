@@ -47,7 +47,7 @@ export default class CoffeeForm extends React.Component {
     }
 
     getOldConfig(value) {
-        fetch('http://localhost:3000/api/getUser?userName=' + value, {
+        fetch(location.origin + '/api/getUser?userName=' + value, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -86,7 +86,7 @@ export default class CoffeeForm extends React.Component {
                 selectedMilk: this.state.selectedMilk,
             };
 
-            fetch('http://localhost:3000/api/saveUser', {
+            fetch(location.origin + '/api/saveUser', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
