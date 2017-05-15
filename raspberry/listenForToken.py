@@ -26,7 +26,6 @@ def main():
                     if data.keystate == 1:
                         key_lookup = scancodes.get(data.scancode) or u'UNKONWN: {}'.format(data.scancode)
                         if key_lookup == u'ENTER':
-                            print tokenHash
                             break
                         else:
                             tokenHash += str(key_lookup)
@@ -35,12 +34,6 @@ def main():
             #getUserConfigFromServer.main(tokenHash)
         except:
             print "wait a moment"
-
-def keyLock(event):
-    return False
-
-def keyUnlock(event):
-    return True
 
 if __name__ == '__main__':
     main()

@@ -11,7 +11,6 @@ def main(coffeeamount, milkamount, strength):
     # print(milkamount)
     # print(strength)
 
-    device = InputDevice("/dev/input/event0")
     # set RaspberryPi pin layout
     GPIO.setmode(GPIO.BCM)  # set pins for output
     GPIO.setup(12, GPIO.OUT)
@@ -26,13 +25,14 @@ def main(coffeeamount, milkamount, strength):
     elif strength == "3067209429":
         GPIO.output(20, GPIO.HIGH)
         time.sleep(3)
-        GPIO.output(12, GPIO.LOW)
+        GPIO.output(20, GPIO.LOW)
     elif strength == "3066946645":
         GPIO.output(21, GPIO.HIGH)
         time.sleep(3)
-        GPIO.output(12, GPIO.LOW)
+        GPIO.output(21, GPIO.LOW)
     else:
         print "token not recognized"
+    GPIO.cleanup()
 
 # map coffeeAmount, milkAmount and strength to a time duration
 # since we have only the option of turning the machine's parts on and off
