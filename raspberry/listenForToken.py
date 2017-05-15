@@ -1,7 +1,6 @@
 import getUserConfigFromServer
 import makeCoffee
 from evdev import InputDevice, categorize, ecodes
-import pythoncom, pyHook
 
 def main():
     scancodes = {
@@ -31,12 +30,7 @@ def main():
                             break
                         else:
                             tokenHash += str(key_lookup)
-            hm = pyHook.HookManager()
-            hm.KeyAll = keyLock
-            pythoncom.PumpMessages()
             makeCoffee.main(100, 100, tokenHash)
-            hm.KeyAll = keyUnlock
-            pythoncom.PumpMessages()
             tokenHash = ""
             #getUserConfigFromServer.main(tokenHash)
         except:
