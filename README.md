@@ -18,15 +18,15 @@ We also want to keep track of who drinks how much coffee, to maybe display a ran
 - We already have a skeleton webapp with a working backend and a working form to submit coffee configurations, although it's still very generic.<br>
 - We can store user input from the webapp on the local file system<br>
 - There is also already a small python script to see if we can increment the coffee counter.
+- A token reader and access to its data output<br>
+- The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)<br>
 </p>
 <h3>The TODOs</h3>
 <p>
 - Decide if we want to store the data on the file system or if we want to use a lightweight database<br>
 - Unit tests! (help wanted and needed)<br>
-- A token reader and access to its data output<br>
 - Secure the webbapp<br>
 - Implement an LDAP authentication against our LDAP server (Passport Strategy)<br>
-- The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)<br>
 - Some nice looking CSS to implement tarent's CI on the webapp?<br>
 - Python script to control the coffee machine through GPIO pins<br>
 - Make the backend asynchronous. At the moment we use sync functions to get everything upand running asap, but async functions would be better<br>
