@@ -1,8 +1,6 @@
 import sys
 import RPi.GPIO as GPIO
 import time
-from evdev import InputDevice, categorize, ecodes
-
 
 def main(coffeeamount, milkamount, strength):
     # if coffeeamount == 0 or strength == 0:
