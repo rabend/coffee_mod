@@ -14,6 +14,7 @@ def main(coffeeamount, milkamount, strength):
     GPIO.setup(12, GPIO.OUT)
     GPIO.setup(20, GPIO.OUT)
     GPIO.setup(21, GPIO.OUT)
+    GPIO.setup(26, GPIO.OUT)
 
     print strength
     if strength == "0871097668":
@@ -29,7 +30,9 @@ def main(coffeeamount, milkamount, strength):
         time.sleep(3)
         GPIO.output(21, GPIO.LOW)
     else:
-        print "token not recognized"
+        GPIO.output(26, GPIO.HIGH)
+        time.sleep(3)
+        GPIO.output(26, GPIO.LOW)
     GPIO.cleanup()
 
 # map coffeeAmount, milkAmount and strength to a time duration
