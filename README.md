@@ -17,7 +17,7 @@ We also want to keep track of who drinks how much coffee, to maybe display a ran
 <p>
 - We already have a skeleton webapp with a working backend and a working form to submit coffee configurations, although it's still very generic.<br>
 - We can store user input from the webapp on the local file system<br>
-- There is also already a small python script to see if we can increment the coffee counter.
+- There is also already a small python script to see if we can increment the coffee counter.<br>
 - A token reader and access to its data output<br>
 - The Frontend needs to reflect all possible choices we can make in configuring a coffee (milliliters, strength, amount of milk, etc)<br>
 </p>
