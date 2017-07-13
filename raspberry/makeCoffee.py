@@ -4,7 +4,7 @@ import time
 import serial
 from coffeeCommands import CoffeeCommands as commands
 
-def main(coffeeamount, milkamount, strength):
+def makeCoffee(coffeeamount, milkamount, strength):
     # if coffeeamount == 0 or strength == 0:
     #     sys.exit(2)
     # print(coffeeamount)
@@ -36,6 +36,3 @@ def main(coffeeamount, milkamount, strength):
         time.sleep(3)
         GPIO.output(26, GPIO.LOW)
     GPIO.cleanup()
-    
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1], sys.argv[2], sys.argv[3]))

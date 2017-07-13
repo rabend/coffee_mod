@@ -1,5 +1,5 @@
-import getUserConfigFromServer
-import makeCoffee
+import getUserConfigFromServer as getter 
+import makeCoffee as coffeeMaker
 from evdev import InputDevice, categorize, ecodes
 
 def main():
@@ -15,7 +15,6 @@ def main():
     }
 
     device = InputDevice("/dev/input/event0")
-
     tokenHash = ""
 
     while True:
@@ -29,9 +28,9 @@ def main():
                             break
                         else:
                             tokenHash += str(key_lookup)
-            makeCoffee.main(100, 100, tokenHash)
+            coffeeMaker.makeCoffee(100, 100, tokenHash)
             tokenHash = ""
-            #getUserConfigFromServer.main(tokenHash)
+            #getter.getUserConfig(tokenHash)
         except:
             print "wait a moment"
 

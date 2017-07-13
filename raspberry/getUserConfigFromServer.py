@@ -1,13 +1,11 @@
-import sys, requests, incrementBeverageCounter, makeCoffee
+import sys, requests
+import incrementBeverageCounter as beverageCounter
+import makeCoffee as coffeeMaker
 
-def main(tokenHash):
+def getUserConfig(tokenHash):
     res = requests.get("http://localhost:3000/api/getUserByTokenHash?tokenHash=" + tokenHash)
     userData = res.json()
     print userData
     name = userData["name"]
-    makeCoffee.main(userData["selectedCoffee"], userData["selectedMilk"], userData["selectedStrength"])
-    
-    incrementBeverageCounter.main(name)
-
-if __name__ == '__main__':
-    main(sys.argv[1:])
+    coffeeMaker.makeCoffee(userData["selectedCoffee"], userData["selectedMilk"], userData["selectedStrength"])
+    beverageCounter.increment(name)
