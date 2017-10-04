@@ -123,7 +123,7 @@ export default class CoffeeForm extends React.Component {
         return (
             <div className="content">
                 <div id="header">
-                    Welcome to /coffee_mod!
+                    Coffee Ordering Framework For Exceptional Energization!
                     <UserNameTextField value={this.state.name} 
                                        onChange={this.handleNameChange.bind(this)} />
                 </div>
